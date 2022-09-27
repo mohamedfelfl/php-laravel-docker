@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Meal;
 use App\Models\Offer;
 use App\Traits\response;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,10 @@ class MealController extends Controller
 {
     use response;
 
+    public function index(): Collection
+    {
+        return Meal::all( );
+    }
     public function add(Request $request): JsonResponse
     {
         $request->validate([

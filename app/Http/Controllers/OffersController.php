@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offer;
 use App\Traits\response;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -11,6 +12,10 @@ use Illuminate\Support\Carbon;
 class OffersController extends Controller
 {
     use response;
+    public function index(): Collection
+    {
+        return Offer::all( );
+    }
 
     public function add(Request $request): JsonResponse
     {
