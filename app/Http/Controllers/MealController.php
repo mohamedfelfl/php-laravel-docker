@@ -38,7 +38,7 @@ class MealController extends Controller
         $meal->rating = $request->input('rating');
         $meal->type = $request->input('type');
         $meal->restaurant = $request->input('restaurant');
-        $meal->tags = $request->input('tags');
+        $meal->tags = implode(",", $request->input('tags'));
 
         if($meal->save()){
             return $this->jsonResponseMessage('Meal added successfully' , data: $meal);

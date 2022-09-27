@@ -9,7 +9,5 @@ class Meal extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'tags' => 'array',
-    ];
+
 }
