@@ -54,7 +54,7 @@ class MealController extends Controller
         ]);
         $user = $request->user();
         if($user->favourites != null){
-            $user->favourites = $user->favourites + $request->input('id');
+            $user->favourites = $user->favourites . ',' . $request->input('id');
         }else{
             $user->favourites = [$request->input('id')];
         }
