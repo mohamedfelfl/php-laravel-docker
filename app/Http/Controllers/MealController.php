@@ -53,7 +53,7 @@ class MealController extends Controller
             'id' => 'required',
         ]);
         $user = $request->user();
-        $user->favourites = $user->favourites + $request->input('id');
+        $user->favourites = $user->favourites . ',' . $request->input('id');
         if($user->save()){
             return $this->jsonResponseMessage('Meal added to favourites successfully', data: $user);
         }
