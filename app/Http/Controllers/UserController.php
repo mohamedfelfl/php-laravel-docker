@@ -43,8 +43,7 @@ class UserController extends Controller
                 $token = $user->createToken("token")->plainTextToken;
                 //MailController::sendEmail($data);
                 return $this->jsonResponseMessage('User saved successfully', data: [
-                    'name' => $user->name,
-                    'email' => $user->email,
+                    $user,
                     'token' => $token,
                     'offers' => (new OffersController)->allOffers(),
                 ]);
@@ -68,8 +67,7 @@ class UserController extends Controller
             $token = $user->createToken("token")->plainTextToken;
             //MailController::sendEmail($data);
             return $this->jsonResponseMessage('User saved successfully', data: [
-                'name' => $user->name,
-                'email' => $user->email,
+                $user,
                 'token' => $token,
                 'offers' => (new OffersController)->allOffers(),
                 ]);
@@ -97,8 +95,7 @@ class UserController extends Controller
             if (Hash::check($request->input('password'), $user->password)) {
                 $token = $user->createToken("token")->plainTextToken;
                 return $this->jsonResponseMessage('Login Successful', true, data: [
-                    'name' => $user->name,
-                    'email' => $user->email,
+                    $user,
                     'token' => $token,
                     'offers' => (new OffersController)->allOffers(),
                 ]);
