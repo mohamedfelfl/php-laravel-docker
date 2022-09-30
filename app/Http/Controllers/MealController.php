@@ -47,6 +47,21 @@ class MealController extends Controller
         }
     }
 
+    public function addMealToFavourite(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+        ]);
+        $user = $request->user();
+        $user->favourites = [$user->favourites, $request->input('id')];
+        if($user->save()){
+            return $this->jsonResponseMessage('Meal added to favourites successfully', data: $user);
+        }
+        else{
+            return $this->jsonResponseMessage("Error with adding to favourites", false);
+        }
+    }
+
     public function delete(Request $request): JsonResponse
     {
         $request->validate([

@@ -26,5 +26,6 @@ Route::group(['prefix' => 'meals'] , function (){
     Route::post('/update', [MealController::class, 'update']);
     Route::post('/delete', [MealController::class, 'delete']);
     Route::post('/get', [MealController::class, 'get']);
+    Route::middleware('auth:sanctum')->post('/favourite', [MealController::class, 'addMealToFavourite']);
     Route::middleware('auth:sanctum')->get('/all', [MealController::class, 'allMeals']);
 });
