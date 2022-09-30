@@ -19,12 +19,12 @@ Route::group(['prefix' => 'offers'] , function (){
     Route::post('/update', [OffersController::class, 'update']);
     Route::post('/delete', [OffersController::class, 'delete']);
     Route::post('/get', [OffersController::class, 'get']);
-    Route::get('/all', [OffersController::class, 'allOffers']);
+    Route::middleware('auth:sanctum')->get('/all', [OffersController::class, 'allOffers']);
 });
 Route::group(['prefix' => 'meals'] , function (){
     Route::post('/add', [MealController::class, 'add']);
     Route::post('/update', [MealController::class, 'update']);
     Route::post('/delete', [MealController::class, 'delete']);
     Route::post('/get', [MealController::class, 'get']);
-    Route::get('/all', [MealController::class, 'allMeals']);
+    Route::middleware('auth:sanctum')->get('/all', [MealController::class, 'allMeals']);
 });
