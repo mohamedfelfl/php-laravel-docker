@@ -60,20 +60,31 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
         ]);
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        if ($user->save()) {
+        $user = User::where('email', $request->input('email'))->first();
+        if($user){
             $token = $user->createToken("token")->plainTextToken;
-            //MailController::sendEmail($data);
-            return $this->jsonResponseMessage('User saved successfully', data: [
+            return $this->jsonResponseMessage('Login Successful', true, data: [
                 $user,
                 'token' => $token,
                 'offers' => (new OffersController)->allOffers(),
+            ]);
+        }else{
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            if ($user->save()) {
+                $token = $user->createToken("token")->plainTextToken;
+                //MailController::sendEmail($data);
+                return $this->jsonResponseMessage('User saved successfully', data: [
+                    $user,
+                    'token' => $token,
+                    'offers' => (new OffersController)->allOffers(),
                 ]);
             } else {
                 return $this->jsonResponseMessage('Something went wrong', false);
             }
+        }
+
     }
 
     public function getUserData(Request $request): JsonResponse
